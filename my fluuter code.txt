@@ -1,0 +1,538 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'LEADS',
+      theme: ThemeData(scaffoldBackgroundColor: const Color(0xff0157c8)),
+      home: const MyHomePage(title: 'Leads'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 120,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      width: 36,
+                      height: 36,
+                      child: const Icon(
+                        Icons.send,
+                        color: Color(0xff0055bb),
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    const Text(
+                      'Leads',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.cloud,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.green),
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.black,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: IntrinsicWidth(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Popup Menu Button for "Today"
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 6),
+                        child: PopupMenuButton<String>(
+                          position: PopupMenuPosition.under,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12), //
+                          ),
+                          color: Colors.white,
+                          onSelected: (String selectedValue) async {
+                            if (selectedValue == 'Custom Date') {}
+                          },
+                          initialValue: 'Today',
+                          itemBuilder: (BuildContext context) {
+                            return ['Today'].map((String item) {
+                              return PopupMenuItem<String>(
+                                value: item,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      item,
+                                      style: const TextStyle(
+                                          fontSize: 14, letterSpacing: -0.35),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList();
+                          },
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 4),
+                              foregroundColor: Colors.white,
+                              side: const BorderSide(color: Colors.white),
+                            ),
+                            onPressed: null,
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    'Today',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      letterSpacing: -0.35,
+                                      color: Colors.white,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: false,
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 4),
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color(0xff0055bb),
+                          side: BorderSide.none,
+                        ),
+                        onPressed: () {},
+                        child: const Row(
+                          children: [
+                            Text(
+                              'Uncontacted',
+                              style: TextStyle(
+                                color: Color(0xff0055bb),
+                                fontSize: 14,
+                                letterSpacing: -0.35,
+                              ),
+                            ),
+                            if (true) ...[
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Icon(
+                                Icons.close,
+                                size: 20,
+                                color: Color(0xff0055bb),
+                              ),
+                            ]
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 4),
+                          foregroundColor: Colors.white,
+                          side: const BorderSide(color: Colors.white),
+                        ),
+                        onPressed: () {},
+                        child: const Row(
+                          children: [
+                            Text(
+                              'Contacted',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                letterSpacing: -0.35,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 4),
+                          foregroundColor: Colors.white,
+                          side: const BorderSide(color: Colors.white),
+                        ),
+                        onPressed: () {},
+                        child: const Row(
+                          children: [
+                            Text(
+                              'Nearest',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                letterSpacing: -0.35,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        foregroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xff0055bb),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  // Lead card 1
+                  _buildLeadCard('Ayesha khan', 'Pool Fencing Installation',
+                      '29 tivoli pl,south', '10 Aug, 12:00pm', Colors.red),
+                  // Lead card 2
+                  _buildLeadCard('Aftab abdullah', 'Pool Fencing Installation',
+                      '29 tivoli pl,south', '10 Aug, 12:00pm', Colors.red),
+                  // Lead card 3
+                  _buildLeadCard('Aftab abdullah', 'Pool Fencing Installation',
+                      '29 tivoli pl,south', '10 Aug, 12:00pm', Colors.blue),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        child: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.send),
+              label: 'Leads',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              label: 'Jobs',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Invoices',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.menu),
+              label: 'Menu',
+            ),
+          ],
+          currentIndex: 0, // Keep the index for the selected item
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLeadCard(String name, String project, String location,
+      String leadInTime, Color color) {
+    return Card(
+      child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(
+                          color: Color(0xff0055bb),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const Text(
+                        '6 KM',
+                        style: const TextStyle(
+                          color: Color(0xff0055bb),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    project,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 2),
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on),
+                      const SizedBox(width: 2),
+                      Text(location),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 0, right: 0),
+                        padding: const EdgeInsets.only(
+                            left: 5, right: 5, top: 2, bottom: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          'Lead In Time',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue,
+                            fontSize: MediaQuery.of(context).size.width * 0.034,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        leadInTime,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          fontSize: MediaQuery.of(context).size.width * 0.034,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Container(
+                    margin: const EdgeInsets.only(left: 0, right: 0),
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 5, top: 2, bottom: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      'Uncontacted',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.red,
+                        fontSize: MediaQuery.of(context).size.width * 0.034,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff2f761a),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4, vertical: 2),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.phone,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 8),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff0851ba),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.message, color: Colors.white, size: 16),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              'M1',
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff0851ba),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.message, color: Colors.white, size: 16),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              'M2',
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Center(
+                      child: Text(
+                    'Time Left',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        border: Border.fromBorderSide(
+                            BorderSide(width: 5, color: color))),
+                    child: const Center(
+                      child: Text('00:00:00',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.alarm),
+                        Icon(Icons.alarm),
+                        Icon(Icons.alarm),
+                        Icon(Icons.alarm),
+                      ],
+                    ),
+                  )
+                ],
+              )
+            ],
+          )),
+    );
+  }
+}
